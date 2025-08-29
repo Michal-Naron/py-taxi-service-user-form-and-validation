@@ -74,6 +74,7 @@ class CarDetailView(LoginRequiredMixin, generic.DetailView):
         elif action == "delete":
             driver.cars.delete(new_car)
 
+
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
     model = Car
     form_class = CarForm
