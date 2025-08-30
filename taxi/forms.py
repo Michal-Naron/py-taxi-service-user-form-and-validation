@@ -14,8 +14,8 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         fields = UserCreationForm.Meta.fields + ("license_number",)
 
     def clean_license_number(self):
-        license_number = (
-                    self.cleaned_data.get("license_number") or "").strip()
+        license_number = (self.cleaned_data.get("license_number")
+                          or "").strip()
 
         if len(license_number) != 8:
             raise ValidationError(
