@@ -5,24 +5,30 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django import forms
 
-from taxi.models import Driver, Car
+from taxi.models import Car
 
 
-class DriverLicenseUpdateForm(UserCreationForm):
+class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
-        model = Driver
+        model = get_user_model()
         fields = UserCreationForm.Meta.fields + ("license_number",)
 
     def clean_license_number(self):
-        license_number = self.cleaned_data["license_number"]
+        license_number = (
+                    self.cleaned_data.get("license_number") or "").strip()
+
         if len(license_number) != 8:
-            raise ValidationError("License_number must have exactly"
-                                  " 8 characters")
-        elif not (license_number[:3].isupper()):
-            raise ValidationError("First 3 charectes of license number must"
-                                  " be uppercases")
-        elif not (license_number[-5:].isdigit()):
-            raise ValidationError("Last 5 characters must be numbers")
+            raise ValidationError(
+                "License number must have exactly 8 characters")
+
+        first_part = license_number[:3]
+        if not (first_part.isalpha() and first_part.isupper()):
+            raise ValidationError(
+                "First 3 characters must be uppercase letters (A–Z)")
+
+        last_part = license_number[-5:]
+        if not last_part.isdigit():
+            raise ValidationError("Last 5 characters must be digits (0–9)")
 
         return license_number
 

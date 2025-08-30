@@ -10,13 +10,13 @@
     <a href="{% url 'taxi:car-update' pk=car.id %}" class="btn btn-secondary link-to-page">
       Update
     </a>
-  <form action="{% url 'taxi:car-detail' %}" method="POST">
+  <form action="{% url 'taxi:car-detail' pk=car.id %}" method="POST">
   {% csrf_token %}
   {% if user in car.drivers.all %}
-     <input type="submit" class="btn link-to-page">Delete me from this car</input>
+     <input type="submit" class="btn link-to-page" value="Delete me from this car">
       <input type="hidden" name="action" value="delete">
     {% else %}
-     <input type="submit" class="btn link-to-page">Assign me to this car</input>
+     <input type="submit" class="btn link-to-page" value="Assign me to this car">
      <input type="hidden" name="action" value="add">
   {% endif %}
   <input type="hidden" name="car_id" value="{{ car.id }}">
