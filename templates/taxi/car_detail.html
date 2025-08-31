@@ -13,14 +13,13 @@
   <form action="{% url 'taxi:car-detail' pk=car.id %}" method="POST">
   {% csrf_token %}
   {% if user in car.drivers.all %}
-     <input type="submit" class="btn link-to-page" value="Delete me from this car">
+    <button type="submit" class="btn link-to-page" > Delete me from this car</button>
       <input type="hidden" name="action" value="delete">
     {% else %}
-     <input type="submit" class="btn link-to-page" value="Assign me to this car">
+    <button type="submit" class="btn link-to-page" > Assign me to this car</button>
      <input type="hidden" name="action" value="add">
   {% endif %}
   <input type="hidden" name="car_id" value="{{ car.id }}">
-<input type="hidden" name="user_id" value="{{ user.id }}">
   </form>
   </h1>
   <p>Manufacturer: ({{ car.manufacturer.name }}, {{ car.manufacturer.country }})</p>
