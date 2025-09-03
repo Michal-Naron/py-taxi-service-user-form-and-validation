@@ -1,5 +1,3 @@
-from importlib.resources.abc import TraversableResources
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
