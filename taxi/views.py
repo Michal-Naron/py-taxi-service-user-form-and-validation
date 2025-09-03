@@ -76,6 +76,7 @@ class CarDetailView(LoginRequiredMixin, generic.DetailView):
 
         return redirect("taxi:car-detail", pk=driver.id)
 
+
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
     model = Car
     form_class = CarForm

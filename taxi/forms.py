@@ -41,9 +41,9 @@ class DriverCreationForm(UserCreationForm):
         model = get_user_model()
         fields = UserCreationForm.Meta.fields + ("license_number",)
 
-
     def clean_license_number(self):
         validate_license_number(self.cleaned_data.get("license_number"))
+
 
 class CarForm(forms.ModelForm):
     drivers = forms.ModelMultipleChoiceField(
